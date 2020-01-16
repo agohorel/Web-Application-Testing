@@ -1,9 +1,10 @@
-import React from 'react'
+import React from "react";
 
-export const Display = () => {
-    return (
-        <div>
-            display goes here
-        </div>
-    )
-}
+export const Display = ({ game }) => {
+  return (
+    <>
+      <h2>balls: {game.balls}</h2>
+      <h2>strikes: {game.strikes}</h2>
+    </>
+  );
+};
