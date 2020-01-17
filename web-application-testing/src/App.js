@@ -17,31 +17,35 @@ export default class App extends Component {
     });
   };
 
-  updateFouls = () => {
-    if (this.state.fouls < 2) {
-      this.setState(
-        {
-          fouls: this.state.fouls + 1,
-          strikes: this.state.strikes + 1,
-          hit: false
-        },
-        () => {
-          this.reset();
-        }
-      );
-    }
+  updateFouls = values => {
+    this.setState(
+      {
+        fouls: this.state.fouls + values.fouls,
+        strikes: this.state.strikes + values.strikes,
+        hit: values.hit
+      },
+      () => {
+        this.reset();
+      }
+    );
   };
 
   reset = () => {
     if (this.state.strikes > 2 || this.state.balls > 3 || this.state.hit) {
-      this.setState({ strikes: 0, balls: 0, hit: false });
+      this.setState({ strikes: 0, balls: 0, fouls: 0, hit: false });
     }
   };
 
-  increment = type => {
-    this.setState({ [type]: this.state[type] + 1, hit: false }, () => {
-      this.reset();
-    });
+  increment = values => {
+    this.setState(
+      {
+        [values.type]: this.state[values.type] + values[values.type],
+        hit: false
+      },
+      () => {
+        this.reset();
+      }
+    );
   };
 
   render() {
@@ -51,7 +55,6 @@ export default class App extends Component {
           game={this.state}
           hit={this.hit}
           updateFouls={this.updateFouls}
-          reset={this.reset}
           increment={this.increment}
         ></Dashboard>
         <Display game={this.state}></Display>

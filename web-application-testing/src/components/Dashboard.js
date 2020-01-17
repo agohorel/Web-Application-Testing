@@ -1,12 +1,14 @@
 import React from "react";
 
-export const Dashboard = ({ game, hit, updateFouls, increment }) => {
+import { outputsFouls, outputsScore } from "../utils";
+
+export const Dashboard = ({ hit, updateFouls, increment, game }) => {
   return (
     <>
-      <button onClick={() => increment("strikes")}>strike</button>
-      <button onClick={() => increment("balls")}>ball</button>
+      <button onClick={() => increment(outputsScore("strikes"))}>strike</button>
+      <button onClick={() => increment(outputsScore("balls"))}>ball</button>
       <button onClick={() => hit()}>hit</button>
-      <button onClick={() => updateFouls()}>foul</button>
+      <button onClick={() => updateFouls(outputsFouls(game))}>foul</button>
     </>
   );
 };
